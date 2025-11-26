@@ -1,0 +1,13 @@
+[project]
+name = "mvc"
+version = "2025.0.0"
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "psycopg",
+    "yoyo-migrations",
+    "python-dotenv"
+]
+
+[tool.hatch.envs.default.scripts]
+start = "python main.py"
