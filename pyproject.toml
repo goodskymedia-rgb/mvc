@@ -2,12 +2,13 @@
 name = "mvc"
 version = "2025.0.0"
 dependencies = [
-    "fastapi",
+    "fastapi[standard]",
     "pydantic",
     "psycopg",
     "yoyo-migrations",
-    "python-dotenv"
+    "python-dotenv",
+    "datetime"
 ]
 
 [tool.hatch.envs.default.scripts]
-start = "python main.py"
+start = "fastapi dev main.py"
