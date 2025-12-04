@@ -15,15 +15,17 @@ def get_weather():
     #weather = {"timestamp": 1, "temperature": {"value": 13, "unit": "celcius"}, "humidity": 4, "uv-index": 4}
     return weather
 
-@app.put("/weather")
-def root():
-    return {}
+@app.post("/weather/")
+def create_item (weather: Weather):
+    feeling = "feeling good"
+    humidity = 4
+    return feeling, humidity
+
+@app.put("/weather/4")
+def humidity_edit (weather: Weather):
+    weather.humidity = 1
+    return weather.humidity
 
 @app.delete("/weather")
 def root():
     return {}
-
-@app.post("/items/")
-def create_item (weather: Weather):
-    feeling = "feeling good"
-    return feeling
