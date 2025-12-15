@@ -13,6 +13,4 @@ dependencies = [
 
 [tool.hatch.envs.default.scripts]
 migrate = "yoyo apply"
-
-
-#start-main = "fastapi dev main.py"
+start = "fastapi dev main.py"
