@@ -5,10 +5,12 @@ dependencies = [
     "fastapi[standard]",
     "pydantic",
     "psycopg",
+    "psycopg2",
     "yoyo-migrations",
     "python-dotenv",
     "datetime"
 ]
 
 [tool.hatch.envs.default.scripts]
+migrate = "yoyo apply"
 start = "fastapi dev main.py"
