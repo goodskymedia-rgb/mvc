@@ -7,19 +7,18 @@ from weather_model import WeatherModel
 app = FastAPI()
 
 
-#class Weather(BaseModel):
-    #timestamp: datetime
-    #dimensions: tuple[int, int]
+class Weather(BaseModel):
+    location: str
+    temperature: int
 
 @app.get("/weather")
-def get_weather():
-    weather = WeatherModel()
+def get_weather(weather_id: int):
+    weather = WeatherModel().load(weather_id)
     return weather
 
 @app.post("/weather")
-def create_item (weather: WeatherModel):
-    weather.feeling = str
-    weather.humidity = int
+def create_item (weather: Weather):
+    weather = WeatherModel().save(weather.location, weather.temperature)
     return weather
 
 @app.put("/weather/{item_id}")
