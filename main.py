@@ -6,27 +6,31 @@ from weather_model import WeatherModel
 
 app = FastAPI()
 
-
 class Weather(BaseModel):
     location: str
     temperature: int
 
 @app.get("/weather")
-def get_weather(weather_id: int):
-    weather = WeatherModel().load(weather_id)
-    return weather
+def get_weather(id: int):
+    weather = WeatherModel().load(id)
+    return Weather(location = weather.location, temperature = weather.temperature)
 
 @app.post("/weather")
-def create_item (weather: Weather):
+def create_item (temperature: int, location: str, weather: Weather):
     weather = WeatherModel().save(weather.location, weather.temperature)
     return weather
 
-@app.put("/weather/{item_id}")
-def humidity_edit (item_id: int, weather: WeatherModel):
-    weather.humidity = 1
-    return weather
+@app.put("/weather/{id}")
+def temperature_edit(id: int, temperature: int, weather: Weather):
+    WeatherModel().update(id, temperature=weather.temperature)
+    return {"status": "temperature was updated"}
 
-@app.delete("/weather")
-def delete_humidity (weather: WeatherModel):
-    weather.humidity = None
-    return weather
+@app.put("/weather/{id}")
+def location_edit(id: int, location: str, weather: Weather):
+    WeatherModel().update(id, location=weather.location)
+    return {"status": "location was updated"}
+
+@app.delete("/weather/{id}")
+def row_delete(id: int, weather: Weather):
+    WeatherModel().delete_weather(id)
+    return {"status": "item was deleted"}
