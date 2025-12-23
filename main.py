@@ -21,14 +21,9 @@ def create_item (temperature: int, location: str, weather: Weather):
     return weather
 
 @app.put("/weather/{id}")
-def temperature_edit(id: int, temperature: int, weather: Weather):
-    WeatherModel().update(id, temperature=weather.temperature)
+def temperature_edit(id: int, weather: Weather):
+    WeatherModel().update(id, temperature=weather.temperature, location=weather.location)
     return {"status": "temperature was updated"}
-
-@app.put("/weather/{id}")
-def location_edit(id: int, location: str, weather: Weather):
-    WeatherModel().update(id, location=weather.location)
-    return {"status": "location was updated"}
 
 @app.delete("/weather/{id}")
 def row_delete(id: int, weather: Weather):
