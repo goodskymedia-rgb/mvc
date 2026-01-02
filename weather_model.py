@@ -10,11 +10,12 @@ class WeatherModel:
       self.temperature = temperature
 
     @staticmethod
-    def save(location: str, temperature: int) -> bool:
+    def save(location: str, temperature: int):
       cur = conn.cursor()
-      cur.execute('INSERT INTO weather (temperature, location) VALUES (%s, %s)', (temperature, location))
+      cur.execute('INSERT INTO weather (temperature, location) VALUES (%s, %s) RETURNING id', (temperature, location))
+      new_id = cur.fetchone()[0]
       conn.commit()
-      return True
+      return new_id
 
     @staticmethod
     def load(id: int, location: str | None = None, temperature: int | None = None):

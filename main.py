@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from datetime import datetime
 
 from weather_model import WeatherModel
 
@@ -16,8 +15,9 @@ def get_weather(id: int):
     return Weather(location = weather.location, temperature = weather.temperature)
 
 @app.post("/weather")
-def create_item (temperature: int, location: str, weather: Weather):
-    weather = WeatherModel().save(weather.location, weather.temperature)
+def create_item (weather: Weather):
+    new_id = WeatherModel().save(weather.location, weather.temperature)
+    #weather = WeatherModel().save(weather.location, weather.temperature)
     return weather
 
 @app.put("/weather/{id}")
