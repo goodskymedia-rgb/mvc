@@ -35,9 +35,9 @@ class WeatherModel:
 
     @staticmethod
     def delete_weather(id: int):
-        #sql = 'DELETE FROM weather WHERE id = %s RETURNING id'
+        sql = 'DELETE FROM weather WHERE id = %s RETURNING id'
         cur = conn.cursor()
-        cur.execute('DELETE FROM weather WHERE id = %s RETURNING id')
+        cur.execute(sql, (id,))
         deleted_id = cur.fetchone()[0]
         conn.commit()
         return deleted_id

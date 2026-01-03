@@ -26,6 +26,6 @@ def temperature_edit(id: int, weather: Weather):
     return {"status": f"item with an id of {updated_id} was updated"}
 
 @app.delete("/weather/{id}")
-def row_delete(id: int, weather: Weather):
+def row_delete(id: int):
     deleted_id = WeatherModel().delete_weather(id)
     return {"status": f"item with an id of {deleted_id} was deleted"}
