@@ -18,14 +18,14 @@ def get_weather(id: int):
 def create_item (weather: Weather):
     new_id = WeatherModel().save(weather.location, weather.temperature)
     #weather = WeatherModel().save(weather.location, weather.temperature)
-    return weather
+    return new_id
 
 @app.put("/weather/{id}")
 def temperature_edit(id: int, weather: Weather):
-    WeatherModel().update(id, temperature=weather.temperature, location=weather.location)
-    return {"status": "temperature was updated"}
+    updated_id = WeatherModel().update(id, temperature=weather.temperature, location=weather.location)
+    return {"status": f"item with an id of {updated_id} was updated"}
 
 @app.delete("/weather/{id}")
 def row_delete(id: int, weather: Weather):
-    WeatherModel().delete_weather(id)
-    return {"status": "item was deleted"}
+    deleted_id = WeatherModel().delete_weather(id)
+    return {"status": f"item with an id of {deleted_id} was deleted"}

@@ -28,15 +28,16 @@ class WeatherModel:
     def update(id: int, location: str | None = None, temperature: int | None = None):
         cur = conn.cursor()
         rows_updated = 0
-        cur.execute("UPDATE weather SET location = %s, temperature = %s WHERE id = %s", (location, temperature, id))
+        cur.execute("UPDATE weather SET location = %s, temperature = %s WHERE id = %s RETURNING id", (location, temperature, id))
+        updated_id = cur.fetchone()[0]
         conn.commit()
-        rows_updated = cur.rowcount
-        return rows_updated
+        return updated_id
 
     @staticmethod
     def delete_weather(id: int):
-        rows_deleted  = 0
-        sql = 'DELETE FROM weather WHERE id = %s'
+        #sql = 'DELETE FROM weather WHERE id = %s RETURNING id'
         cur = conn.cursor()
-        cur.execute(sql, (id,))
+        cur.execute('DELETE FROM weather WHERE id = %s RETURNING id')
+        deleted_id = cur.fetchone()[0]
         conn.commit()
+        return deleted_id
