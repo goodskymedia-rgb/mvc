@@ -1,6 +1,6 @@
 # code       that       constructs and returns       WeatherModel
 import psycopg2
-conn = psycopg2.connect(host="localhost", port="5432", database="taras")
+conn = psycopg2.connect(host="localhost", port="5432", database="taras", user="postgres")
 
 
 class WeatherModel:
