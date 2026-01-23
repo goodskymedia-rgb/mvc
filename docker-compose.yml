@@ -2,14 +2,30 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 services:
+  app:
+    build: .
+    image: goodskymedia/mvc-app:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresql
+    environment:
+      PG_HOSTNAME: postgresql
+      PG_PORT: 5432
+      PG_USERNAME: taras
+      PG_PASSWORD: "11111"
+      PG_DATABASE: postgres
+
   postgresql:
     image: bitnami/postgresql:latest
     ports:
       - '5432:5432'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - postgresql_data:/bitnami/postgresql
     environment:
-      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - PG_USERNAME=taras
+      - PG_PASSWORD=11111
+      - PG_DATABASE=postgres
 
 volumes:
   postgresql_data:
