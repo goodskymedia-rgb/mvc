@@ -5,10 +5,11 @@ dependencies = [
     "fastapi[standard]",
     "pydantic",
     "psycopg",
-    "psycopg2",
+    "psycopg2-binary",
     "yoyo-migrations",
     "python-dotenv",
-    "datetime"
+    "datetime",
+    "pytest"
 ]
 
 [tool.hatch.envs.default.scripts]

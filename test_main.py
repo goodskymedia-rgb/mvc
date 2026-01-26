@@ -27,7 +27,7 @@ def test_update_weather():
     assert {"status": f"item with an id of {new_id} was updated"}
 
 def test_delete_weather():
-    new_id = client.post("/weather", json={"location": "UA", "temperature": 25}).json()
+    new_id = client.post("/weather", json={"location": "blabla", "temperature": 48}).json()
     response = client.delete(f"/weather/{new_id}")
     assert response.status_code == 200
     assert response.json() == {"status": f"item with an id of {new_id} was deleted"}
